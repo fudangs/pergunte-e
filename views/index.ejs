@@ -1,0 +1,19 @@
+<%- include('partials/header.ejs'); %>
+<body>
+    <%- include('partials/navbar.ejs'); %>
+    <div class="container">
+        <a href="/perguntar" class="btn btn-info">Perguntar</a>
+        <% perguntas.forEach(pergunta => { %>
+        <div class="card" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="card-header"><%= pergunta.titulo %> <span class='float-right' style="text-align: right;"><%= pergunta.createdAt.getHours() %>:<%= pergunta.createdAt.getMinutes()%> - <%=pergunta.createdAt.getDate()%>/<%=(pergunta.createdAt.getMonth() + 1)%>/<%=pergunta.createdAt.getFullYear()%></span></div>
+            <div class="card-body">
+                <textarea class="form-control" readonly style="resize:vertical; min-height: 80px;"><%= pergunta.descricao%></textarea>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-info" href="/pergunta/<%= pergunta.id %>">Responder</a>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</body>
+<%- include('partials/footer.ejs'); %>

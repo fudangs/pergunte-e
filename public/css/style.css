@@ -1,0 +1,10 @@
+body{
+    background-color: #1a1a1a;
+}
+.logo-quest{
+    max-width: 40px;
+    max-height: 40px;
+}
+.navbar{
+    margin-bottom: 3%;
+}

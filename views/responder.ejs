@@ -1,0 +1,44 @@
+<%- include('partials/header.ejs'); %>
+<body>
+    <%- include('partials/navbar.ejs'); %>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <%= pergunta.titulo %>
+            </div>
+            <div class="card-body">
+                <textarea class="form-control" readonly style="resize:vertical; min-height: 80px; max-height: 160px;"><%= pergunta.descricao %></textarea>
+            </div>
+            <div class="card-footer">
+                <% respostas.forEach(resposta => { %>
+                    <fieldset>
+                        <legend style="font-size: medium; text-align: right;"><%= resposta.createdAt.getHours() %>:<%= resposta.createdAt.getMinutes() %> - <%= resposta.createdAt.getDate() %>/<%= (resposta.createdAt.getMonth() + 1)%>/<%= resposta.createdAt.getFullYear()%></legend>
+                        <textarea class="form-control" style="min-height: 80px; margin-bottom: 20px;" readonly><%= resposta.resposta %></textarea>
+                    </fieldset>
+                <% }) %>
+            </div>
+        </div>
+        <div class="card" style="margin-top: 20px;">
+            <div class="card-header">
+                Responder
+            </div>
+            <div class="card-body">
+                <form action="/responder" method="POST">
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label for="txtResposta">Resposta</label>
+                            <textarea name="txtResposta" id="txtResposta" style="resize: vertical; min-height: 80px;" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="hidden" name="iPergunta" value="<%= pergunta.id %>">
+                        <div class="form-group col-12">
+                            <button type="submit" class="btn btn-success btn-block">Responder</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<%- include('partials/footer.ejs'); %>
